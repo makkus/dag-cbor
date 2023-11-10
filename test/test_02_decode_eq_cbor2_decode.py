@@ -3,7 +3,7 @@
 """
 # pylint: disable = global-statement
 
-import cbor2_decoder.decoder as cbor2_decoder # type: ignore
+import cbor2.decoder as cbor2_decoder # type: ignore
 import cbor2
 from multiformats import CID
 
