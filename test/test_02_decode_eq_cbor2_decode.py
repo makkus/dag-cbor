@@ -3,8 +3,8 @@
 """
 # pylint: disable = global-statement
 
-import cbor2.decoder as cbor2 # type: ignore
-
+import cbor2_decoder.decoder as cbor2_decoder # type: ignore
+import cbor2
 from multiformats import CID
 
 from dag_cbor import encode, decode
@@ -21,7 +21,7 @@ def test_int() -> None:
     for i, x in enumerate(test_data):
         error_msg = f"failed at #{i} = {repr(x)}"
         encoded_data = encode(x)
-        assert decode(encoded_data) == cbor2.loads(encoded_data), error_msg
+        assert decode(encoded_data) == cbor2_decoder.loads(encoded_data), error_msg
 
 def test_special_int() -> None:
     """
@@ -35,7 +35,7 @@ def test_special_int() -> None:
     for i, x in enumerate(special_data):
         error_msg = f"failed at #{i} = {repr(x)}"
         encoded_data = encode(x)
-        assert decode(encoded_data) == cbor2.loads(encoded_data), error_msg
+        assert decode(encoded_data) == cbor2_decoder.loads(encoded_data), error_msg
 
 def test_bytes() -> None:
     """
@@ -46,7 +46,7 @@ def test_bytes() -> None:
     for i, x in enumerate(test_data):
         error_msg = f"failed at #{i} = {repr(x)}"
         encoded_data = encode(x)
-        assert decode(encoded_data) == cbor2.loads(encoded_data), error_msg
+        assert decode(encoded_data) == cbor2_decoder.loads(encoded_data), error_msg
 
 def test_str() -> None:
     """
@@ -57,7 +57,7 @@ def test_str() -> None:
     for i, x in enumerate(test_data):
         error_msg = f"failed at #{i} = {repr(x)}"
         encoded_data = encode(x)
-        assert decode(encoded_data) == cbor2.loads(encoded_data), error_msg
+        assert decode(encoded_data) == cbor2_decoder.loads(encoded_data), error_msg
 
 def test_bool_none() -> None:
     """
@@ -68,7 +68,7 @@ def test_bool_none() -> None:
     for i, x in enumerate(test_data):
         error_msg = f"failed at #{i} = {repr(x)}"
         encoded_data = encode(x)
-        assert decode(encoded_data) == cbor2.loads(encoded_data), error_msg
+        assert decode(encoded_data) == cbor2_decoder.loads(encoded_data), error_msg
 
 def test_float() -> None:
     """
@@ -79,7 +79,7 @@ def test_float() -> None:
     for i, x in enumerate(test_data):
         error_msg = f"failed at #{i} = {repr(x)}"
         encoded_data = encode(x)
-        assert decode(encoded_data) == cbor2.loads(encoded_data), error_msg
+        assert decode(encoded_data) == cbor2_decoder.loads(encoded_data), error_msg
 
 def test_list() -> None:
     """
@@ -91,7 +91,7 @@ def test_list() -> None:
         for i, x in enumerate(test_data):
             error_msg = f"failed at #{i} = {repr(x)}"
             encoded_data = encode(x)
-            assert decode(encoded_data) == cbor2.loads(encoded_data), error_msg
+            assert decode(encoded_data) == cbor2_decoder.loads(encoded_data), error_msg
 
 def test_dict() -> None:
     """
@@ -103,7 +103,7 @@ def test_dict() -> None:
         for i, x in enumerate(test_data):
             error_msg = f"failed at #{i} = {repr(x)}"
             encoded_data = encode(x)
-            assert decode(encoded_data) == cbor2.loads(encoded_data), error_msg
+            assert decode(encoded_data) == cbor2_decoder.loads(encoded_data), error_msg
 
 def test_cid() -> None:
     """
@@ -116,4 +116,4 @@ def test_cid() -> None:
         encoded_data = encode(x)
         decoded_data = decode(encoded_data)
         assert isinstance(decoded_data, CID)
-        assert cbor2.CBORTag(42, b"\0" + bytes(decoded_data)) == cbor2.loads(encoded_data), error_msg
+        assert cbor2.CBORTag(42, b"\0" + bytes(decoded_data)) == cbor2_decoder.loads(encoded_data), error_msg
