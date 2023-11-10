@@ -286,7 +286,7 @@ def _decode_cid(stream: Stream, arg: int, options: _DecodeOptions) -> Tuple[CID,
     cid_head_snapshots = stream.prev_snapshot, stream.curr_snapshot
     try:
         if "callback" in options:
-            options = {**options} # type: ignore
+            options = {**options}
             del options["callback"]
         cid_bytes, num_bytes_read = _decode_item(stream, options)
     except CBORDecodingError as e:
